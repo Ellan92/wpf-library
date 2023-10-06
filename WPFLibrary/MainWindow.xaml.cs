@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -85,11 +86,73 @@ namespace WPFLibrary
                 btnRemove.IsEnabled = false;
             }
         }
+
+        private void lstBooks_Click(object sender, RoutedEventArgs e)
+        {
+            ListBoxItem selectedItem = (ListBoxItem)lstBooks.SelectedItem;
+            Book newBook = (Book)selectedItem.Tag;
+            tbAuthor.Text = newBook.Author.Name;
+            tbTitle.Text = newBook.Title;
+            tbBirthyear.Text = newBook.Author.YearOfBirth.ToString();
+            tbYear.Text = newBook.Year.ToString();
+            tbNoteworthyInformation.Text = newBook.Author.NoteworthyInformation;
+        }
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            //Button editButton = (Button)sender;
+
+            ListBoxItem selectedItemEdit = (ListBoxItem)lstBooks.SelectedItem;
+            if (selectedItemEdit != null)
+            {
+                if (int.TryParse(tbBirthyear.Text, out int yearOfBirth) && int.TryParse(tbYear.Text, out int yearPublished))
+                {
+                    Book newBook = (Book)selectedItemEdit.Tag;
+                    newBook.Author.Name = tbAuthor.Text;
+                    newBook.Title = tbTitle.Text;
+                    newBook.Year = Convert.ToInt32(tbYear.Text);
+                    newBook.Author.YearOfBirth = Convert.ToInt32(tbBirthyear.Text);
+                    newBook.Author.NoteworthyInformation = tbNoteworthyInformation.Text;
+
+                    selectedItemEdit.Tag = newBook;
+                    selectedItemEdit.Content = newBook.GetInfo();
+
+                    tbAuthor.Text = "";
+                    tbTitle.Text = "";
+                    tbYear.Text = "";
+                    tbBirthyear.Text = "";
+                    tbNoteworthyInformation.Text = "";
+
+                }
+                else
+                {
+                    MessageBox.Show("Years can only be numbers!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("You must select an item!");
+            }
+
+
+
+        }
+
+        //private void nånting
+        //    {
+        //                    if (lstBooks.SelectedItem != null)
+        //        {
+        //            btnEdit.Visibility = Visibility.Visible
+        //}
+        //        else
+        //        {
+        //            btnEdit.Visibility = Visibility.Collapsed;
+        //        }
     }
-
-    //private void Button_Click_Edit(object sender, RoutedEventArgs e)
-    //{
-
-    //}
 }
+
+//private void Button_Click_Edit(object sender, RoutedEventArgs e)
+//{
+
+//}
+
 

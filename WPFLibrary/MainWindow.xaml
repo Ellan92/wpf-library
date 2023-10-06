@@ -122,7 +122,8 @@
             Grid.Row="2"
             Grid.ColumnSpan="4"
             Grid.RowSpan="8"
-            Margin="10"/>
+            Margin="10"
+            MouseDoubleClick="lstBooks_Click"/>
 
         <Button
             Name="btnAdd"
@@ -149,6 +150,6 @@
             Margin="5"
             Content="Edit"
             FontSize="20"
-            Background="LightBlue"/>
+            Background="LightBlue" Click="btnEdit_Click"/>
     </Grid>
 </Window>
